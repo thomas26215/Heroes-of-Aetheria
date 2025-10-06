@@ -1,0 +1,77 @@
+@use "sass:color";
+
+$primary-color: #3b82f6;       // bleu moderne
+$text-color: #111827;          // gris très sombre
+$bg-color: #f9fafb;            // fond clair
+$card-bg: #ffffff;             // fond des cartes
+$border-color: #e5e7eb;
+$font-stack: "Inter", system-ui, sans-serif;
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $text-color;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.heroes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero-card {
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  color: $text-color;
+  font-family: $font-stack;
+  border: 1px solid $border-color;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: $primary-color;
+  }
+
+  .badge {
+    background: $primary-color;
+    color: white;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba($primary-color, 0.4);
+  }
+
+  .hero-info {
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+      color: color.scale($text-color, $lightness: 30%);
+    }
+  }
+}
+

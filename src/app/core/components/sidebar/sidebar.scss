@@ -1,0 +1,102 @@
+.sidebar {
+  width: 60px;
+  background: white;
+  padding: 20px 10px;
+  border-left: 1px solid #eaeaea;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh; /* Assure que la sidebar prend toute la hauteur */
+  transition: width 0.3s ease;
+  overflow: hidden; /* masque le texte quand réduit */
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .logo-icon {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1c2c4c;
+    }
+
+    .logo-text {
+      font-size: 14px;
+      margin-top: 5px;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+      text-align: center;
+      white-space: normal;
+    }
+  }
+
+  nav {
+    width: 100%;
+    flex-grow: 1; /* Prend tout l’espace vertical restant */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Les liens commencent en haut */
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Centrer icône en sidebar réduite */
+      gap: 10px;
+      margin: 10px 0;
+      padding: 8px;
+      text-decoration: none;
+      color: #1c2c4c;
+      white-space: nowrap;
+      border-radius: 4px;
+      transition: background 0.2s, justify-content 0.3s ease;
+      cursor: pointer;
+
+      .text {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: opacity 0.3s ease, width 0.3s ease;
+        display: inline-block;
+      }
+
+      &.active {
+        font-weight: bold;
+        color: #32c8a8;
+      }
+
+      &:hover {
+        background: #f0f0f0;
+      }
+    }
+  }
+
+  /* Au survol global de la sidebar */
+  &:hover {
+    width: 240px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .logo-text {
+      opacity: 1;
+      max-height: 100px; /* assez grand pour texte */
+    }
+
+    nav a {
+      justify-content: flex-start; /* icône + texte alignés à gauche */
+
+      .text {
+        opacity: 1;
+        width: auto;
+      }
+    }
+  }
+}
+
+

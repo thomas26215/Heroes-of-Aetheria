@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "venouilt-Toh2025": {
+    "venouilt-toh2025": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -58,10 +58,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "venouilt-Toh2025:build:production"
+              "buildTarget": "venouilt-toh2025:build:production"
             },
             "development": {
-              "buildTarget": "venouilt-Toh2025:build:development"
+              "buildTarget": "venouilt-toh2025:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,5 +86,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

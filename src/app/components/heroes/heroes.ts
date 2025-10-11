@@ -23,18 +23,23 @@ export class Heroes implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.messageService.add('ngOnInit called in Heroes component');
     this.getHeroes();
+    this.messageService.add('ngOnInit called in Heroes component after loaded');
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes().subscribe((heroes) => {
+    console.log('Fetching heroes from Firestore...');
+    this.heroService.getHeroes().subscribe(heroes => {
       this.heroes = heroes;
       this.messageService.add('Heroes component: loaded heroes from Firestore');
+      console.log('Heroes fetched:', this.heroes);
     });
   }
 
-  trackByHeroId(index: number, hero: HeroInterface): number {
-    return hero.id;
-  }
+  trackByHeroId(index: number, hero: HeroInterface): string {
+  return hero.id;
+}
+
 }
 

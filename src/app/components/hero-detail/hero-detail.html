@@ -1,14 +1,38 @@
 <div *ngIf="hero" class="hero-details">
   <h2>{{ hero.name | uppercase }} Details</h2>
+
+  <!-- Affichage clair de l'image OU du lien -->
+  <ng-container *ngIf="hero.imageUrl; else noImage">
+    <img [src]="hero.imageUrl.trim()" alt="{{ hero.name }} image" class="hero-img" />
+    <div class="img-link">
+      <a [href]="hero.imageUrl.trim()" target="_blank" rel="noopener">Voir l'image en taille réelle</a>
+    </div>
+  </ng-container>
+  <ng-template #noImage>
+    <div class="img-link">Aucune image disponible pour ce héros.</div>
+  </ng-template>
+
+  <div><span>id: </span>{{ hero.id }}</div>
   <div>
-    <span>id: </span>{{ hero.id }}
-  </div>
-  <div>
-    <span>name: </span>{{ hero.name }}
-  </div>
-  <div>
-    <label for="name">Hero name: </label>
+    <label for="name">name:</label>
     <input id="name" [(ngModel)]="hero.name" placeholder="name" />
   </div>
+  <div><span>description: </span>{{ hero.description }}</div>
+  <div><span>attack: </span>{{ hero.attack }}</div>
+  <div><span>dodge: </span>{{ hero.dodge }}</div>
+  <div><span>healt: </span>{{ hero.healt }}</div>
+  <div><span>maximal_healt: </span>{{ hero.maximal_healt }}</div>
+  <div *ngIf="hero.power"><span>power: </span>{{ hero.power }}</div>
+
+  <!-- Le reste du template inchangé -->
+  <div class="button-group">
+    <button class="update-btn" (click)="updateHero()">Update Hero</button>
+    <button class="start-btn" (click)="startGame()">Commencer une partie</button>
+  </div>
+  <div *ngFor="let msg of messageService.getMessages()" class="messages">
+    {{ msg }}
+  </div>
 </div>
+
+<app-messages></app-messages>
 

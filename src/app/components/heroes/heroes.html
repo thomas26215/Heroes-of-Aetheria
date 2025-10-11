@@ -1,4 +1,7 @@
-<h2 class="dashboard-title">Dashboard des Héros</h2>
+<h1>Liste des Héros</h1>
+
+<p>Découvrez nos héros légendaires !</p>
+
 
 <div class="heroes-grid">
   <a
@@ -6,13 +9,15 @@
     class="hero-card"
     [routerLink]="['/hero', hero.id]"
   >
-    <div class="badge">{{ hero.id }}</div>
+    <div class="avatar">{{ hero.name[0] }}</div>
     <div class="hero-info">
       <h3>{{ hero.name }}</h3>
-      <p>Voir les détails</p>
+      <p>{{ hero.description }}</p>
     </div>
   </a>
 </div>
 
-<app-messages></app-messages>
 
+
+
+<app-messages></app-messages>

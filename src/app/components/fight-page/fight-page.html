@@ -1,0 +1,33 @@
+<div class="battle-arena">
+  <div class="battle-field">
+    <div class="enemy">
+      <img *ngIf="enemy?.imageUrl" [src]="enemy?.imageUrl" alt="{{ enemy?.name }} face" class="enemy-img" />
+      <div class="hp-bar">
+        <span>{{ enemy?.name }} (PV : {{ enemyHp }})</span>
+        <div class="hp-fill" [style.width.%]="(enemyHp ?? 0) / (enemy?.base_hp ?? 1) * 100"></div>
+      </div>
+    </div>
+
+    <div class="hero">
+      <img *ngIf="hero?.imageUrl" [src]="hero?.imageUrl" alt="{{ hero?.name }} dos" class="hero-img back-view" />
+      <div class="hp-bar">
+        <span>{{ hero?.name }} (PV : {{ heroHp }})</span>
+        <div class="hp-fill" [style.width.%]="(heroHp ?? 0) / (hero?.maximal_healt ?? 1) * 100"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-panel">
+    <button (click)="attackEnemy()" [disabled]="enemyHp === 0 || heroHp === 0">Attaquer</button>
+    <button (click)="dodge()" [disabled]="enemyHp === 0 || heroHp === 0">Esquiver</button>
+    <button (click)="heal()" [disabled]="enemyHp === 0 || heroHp === 0">Soin</button>
+    <button (click)="enemyAttack()" [disabled]="enemyHp === 0 || heroHp === 0">L'ennemi attaque</button>
+  </div>
+
+  <div class="messages">
+    <div *ngFor="let msg of messageService.getMessages().slice().reverse()">
+      {{ msg }}
+    </div>
+  </div>
+</div>
+

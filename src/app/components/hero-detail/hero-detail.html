@@ -1,11 +1,13 @@
-<div *ngIf="hero" class="hero-details">
+<div *ngIf="hero && heroForm" class="hero-details" [formGroup]="heroForm">
   <h2>{{ hero.name | uppercase }} Details</h2>
 
-  <!-- Affichage clair de l'image OU du lien -->
+  <!-- Image -->
   <ng-container *ngIf="hero.imageUrl; else noImage">
     <img [src]="hero.imageUrl.trim()" alt="{{ hero.name }} image" class="hero-img" />
     <div class="img-link">
-      <a [href]="hero.imageUrl.trim()" target="_blank" rel="noopener">Voir l'image en taille réelle</a>
+      <a [href]="hero.imageUrl.trim()" target="_blank" rel="noopener">
+        Voir l'image en taille réelle
+      </a>
     </div>
   </ng-container>
   <ng-template #noImage>
@@ -13,22 +15,56 @@
   </ng-template>
 
   <div><span>id: </span>{{ hero.id }}</div>
-  <div>
-    <label for="name">name:</label>
-    <input id="name" [(ngModel)]="hero.name" placeholder="name" />
-  </div>
-  <div><span>description: </span>{{ hero.description }}</div>
-  <div><span>attack: </span>{{ hero.attack }}</div>
-  <div><span>dodge: </span>{{ hero.dodge }}</div>
-  <div><span>healt: </span>{{ hero.healt }}</div>
-  <div><span>maximal_healt: </span>{{ hero.maximal_healt }}</div>
-  <div *ngIf="hero.power"><span>power: </span>{{ hero.power }}</div>
 
-  <!-- Le reste du template inchangé -->
+  <div>
+    <label for="name">Nom :</label>
+    <input id="name" type="text" formControlName="name" placeholder="name" />
+    <div *ngIf="heroForm.get('name')?.invalid && heroForm.get('name')?.touched" class="error">
+      <small *ngIf="heroForm.get('name')?.hasError('required')">Le nom est requis.</small>
+      <small *ngIf="heroForm.get('name')?.hasError('minlength')">Au moins 2 caractères.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Description :</label>
+    <textarea id="description" formControlName="description"></textarea>
+  </div>
+
+  <div>
+    <label for="attack">Attaque :</label>
+    <input id="attack" type="number" formControlName="attack" />
+  </div>
+
+  <div>
+    <label for="dodge">Esquive :</label>
+    <input id="dodge" type="number" formControlName="dodge" />
+  </div>
+
+  <div>
+    <label for="healt">PV :</label>
+    <input id="healt" type="number" formControlName="healt" />
+  </div>
+
+  <div>
+    <label for="maximal_healt">PV max :</label>
+    <input id="maximal_healt" type="number" formControlName="maximal_healt" />
+  </div>
+
+  <div>
+    <label for="power">Pouvoir :</label>
+    <input id="power" type="text" formControlName="power" />
+  </div>
+
+  <div>
+    <label for="imageUrl">Image URL :</label>
+    <input id="imageUrl" type="text" formControlName="imageUrl" />
+  </div>
+
   <div class="button-group">
-    <button class="update-btn" (click)="updateHero()">Update Hero</button>
+    <button class="update-btn" (click)="updateHero()" [disabled]="heroForm.invalid">Update Hero</button>
     <button class="start-btn" (click)="startGame()">Commencer une partie</button>
   </div>
+
   <div *ngFor="let msg of messageService.getMessages()" class="messages">
     {{ msg }}
   </div>

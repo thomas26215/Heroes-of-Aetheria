@@ -1,4 +1,6 @@
 $primary-color: #3b82f6;
+$success-color: #10b981;
+$error-color: #ef4444;
 $text-color: #111827;
 $border-color: #e5e7eb;
 $bg-light: #f9fafb;
@@ -15,8 +17,8 @@ $font-stack: "Inter", system-ui, sans-serif;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease;
   width: 100%;
-  max-width: 420px;
-  margin: 1.5rem auto 0;
+  max-width: 480px;
+  margin: 1.5rem auto;
 
   &:hover {
     transform: translateY(-2px);
@@ -38,7 +40,7 @@ $font-stack: "Inter", system-ui, sans-serif;
     margin: 0.8rem 0;
     font-weight: 500;
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
     span {
       min-width: 60px;
@@ -54,7 +56,8 @@ $font-stack: "Inter", system-ui, sans-serif;
     color: $text-color;
   }
 
-  input {
+  input,
+  textarea {
     width: 100%;
     padding: 0.55rem 0.75rem;
     border: 1.5px solid $border-color;
@@ -76,51 +79,99 @@ $font-stack: "Inter", system-ui, sans-serif;
       color: lighten($text-color, 35%);
       font-style: italic;
     }
+
+    /* Champs invalides */
+    &.ng-invalid.ng-touched {
+      border-color: $error-color;
+      box-shadow: 0 0 6px rgba($error-color, 0.2);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .error {
+    margin-top: 0.25rem;
+    color: $error-color;
+    font-size: 0.85rem;
+    font-weight: 500;
   }
 
   /* Groupe de boutons */
   .button-group {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     display: flex;
-    gap: 0.5rem;  // espace entre les boutons
+    gap: 0.75rem;
     flex-wrap: wrap;
-  }
 
-  button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      transform: translateY(-1px);
-      opacity: 0.95;
-    }
-
-    &.update-btn {
-      background-color: $primary-color;
+    button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
       color: white;
-    }
 
-    &.start-btn {
-      background-color: #10b981; // vert
-      color: white;
+      &:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+      }
+
+      &.update-btn {
+        background-color: $primary-color;
+      }
+
+      &.update-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      &.start-btn {
+        background-color: $success-color;
+      }
     }
   }
 
   /* Messages */
   .messages {
-    margin-top: 0.5rem;
-    color: green;
+    margin-top: 0.75rem;
+    color: $success-color;
     font-weight: 600;
   }
 }
 
 .hero-img {
-  max-width: 200px;
+  max-width: 220px;
   border-radius: 8px;
   margin-bottom: 18px;
+  display: block;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.img-link {
+  margin-bottom: 1rem;
+
+  a {
+    font-size: 0.9rem;
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .hero-details {
+    padding: 1.25rem;
+    max-width: 95%;
+  }
 }
 

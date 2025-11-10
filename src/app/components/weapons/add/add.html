@@ -1,0 +1,45 @@
+<h2>Ajouter une nouvelle arme</h2>
+
+<form [formGroup]="weaponForm" (ngSubmit)="addWeapon()" novalidate>
+  <div class="form-group">
+    <label for="name">Nom :</label>
+    <input id="name" type="text" formControlName="name" placeholder="Nom de l'arme" />
+    <small *ngIf="weaponForm.get('name')?.invalid && weaponForm.get('name')?.touched" class="error">
+      Le nom est requis (2 caractères minimum).
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description :</label>
+    <textarea id="description" formControlName="description" placeholder="Description de l'arme"></textarea>
+    <small *ngIf="weaponForm.get('description')?.invalid && weaponForm.get('description')?.touched" class="error">
+      La description est requise (10 caractères minimum).
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="attack">Puissance :</label>
+    <input id="attack" type="number" formControlName="attack" />
+  </div>
+
+  <div class="form-group">
+    <label for="type">Type :</label>
+    <select id="type" formControlName="type">
+      <option *ngFor="let wt of weaponTypes" [value]="wt.value">{{ wt.label }}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="imageFile">Image :</label>
+    <input id="imageFile" type="file" (change)="onFileSelected($event)" />
+  </div>
+
+  <button type="submit" [disabled]="weaponForm.invalid || submitting">
+    {{ submitting ? 'Ajout en cours...' : 'Ajouter l\'arme' }}
+  </button>
+</form>
+
+<div class="messages" *ngFor="let msg of messageService.getMessages()">
+  {{ msg }}
+</div>
+

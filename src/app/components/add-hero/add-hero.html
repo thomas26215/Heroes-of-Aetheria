@@ -1,0 +1,60 @@
+<h2>Ajouter un nouveau héros</h2>
+
+<form [formGroup]="heroForm" (ngSubmit)="addHero()" novalidate>
+  <div class="form-group">
+    <label for="name">Nom :</label>
+    <input id="name" type="text" formControlName="name" placeholder="Nom du héros" />
+    <small *ngIf="heroForm.get('name')?.invalid && heroForm.get('name')?.touched" class="error">
+      Le nom est requis (2 caractères minimum).
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description :</label>
+    <textarea id="description" formControlName="description" placeholder="Décris ton héros..."></textarea>
+    <small *ngIf="heroForm.get('description')?.invalid && heroForm.get('description')?.touched" class="error">
+      La description est requise (10 caractères minimum).
+    </small>
+  </div>
+
+  <div class="stats">
+    <div>
+      <label for="attack">Attaque :</label>
+      <input id="attack" type="number" formControlName="attack" />
+    </div>
+    <div>
+      <label for="dodge">Esquive :</label>
+      <input id="dodge" type="number" formControlName="dodge" />
+    </div>
+  </div>
+
+  <div class="stats">
+    <div>
+      <label for="healt">PV :</label>
+      <input id="healt" type="number" formControlName="healt" />
+    </div>
+    <div>
+      <label for="maximal_healt">PV max :</label>
+      <input id="maximal_healt" type="number" formControlName="maximal_healt" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="power">Pouvoir :</label>
+    <input id="power" type="text" formControlName="power" placeholder="Pouvoir spécial" />
+  </div>
+
+  <div class="form-group">
+    <label for="imageFile">Image :</label>
+    <input id="imageFile" type="file" (change)="onFileSelected($event)" />
+  </div>
+
+  <button type="submit" [disabled]="heroForm.invalid || submitting">
+    {{ submitting ? 'Ajout en cours...' : 'Ajouter le héros' }}
+  </button>
+</form>
+
+<div class="messages" *ngFor="let msg of messageService.getMessages()">
+  {{ msg }}
+</div>
+
